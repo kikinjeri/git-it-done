@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git it Done</title>
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body class="flex-column min-100-vh">
+
+  <header class="hero flex-column">
+    <h1 class="app-title"><i class="fab fa-github"></i> Git it Done!</h1>
+    <p>Search for a GitHub user or click on a language to see repositories and their open issues.</p>
+  </header>
+
+  <main class="flex-row">
+    <div class="col-12 col-md-4 flex-column">
+      <div class="card">
+        <h3 class="card-header">Search by User</h3>
+        <form id="user-form" class="card-body">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" name="username" class="form-input" aria-required="true" autofocus>
+          <button type="submit" class="btn">Get User</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3 class="card-header">Search by Language</h3>
+        <div id="language-buttons" class="card-body">
+          <button class="btn" data-language="javascript" aria-label="Search JavaScript repos">JavaScript</button>
+          <button class="btn" data-language="html" aria-label="Search HTML repos">HTML</button>
+          <button class="btn" data-language="css" aria-label="Search CSS repos">CSS</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-8 flex-column">
+      <h2>Showing Repositories for: <span id="repo-search-term">None</span></h2>
+      <div id="repos-container" class="list-group">
+        <p>Enter a username or select a language to see repositories...</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/js/homepage.js"></script>
+</body>
+</html>
