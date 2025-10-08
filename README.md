@@ -1,131 +1,106 @@
-# Git it Done! 🐙
+# 🛠️ Git-It-Done
 
-Git it Done! is a responsive web app that allows you to search for GitHub repositories and view open issues for any user or programming language. Built with vanilla HTML, CSS, and JavaScript, it fetches live data from the GitHub API and presents it in a clean, accessible interface.
+A sleek and modern task management web app built to help developers and teams stay productive.  
+Git-It-Done combines simplicity with power — allowing you to create, track, and complete tasks effortlessly.  
+
+![App Screenshot](assets/screenshot.png)  
 
 
+---
 
 ## 🚀 Features
 
-- ✅ **Web3Forms Integration** – Secure, backend-free message delivery.
-- 🌙 **Dark Mode Toggle** – Smooth theme transition with CSS variables.
-- 💬 **Real-Time Feedback** – Shows live status ("Sending...", "Success", or "Error").
-- 📱 **Fully Responsive** – Looks great on desktop, tablet, and mobile.
-- ♿ **Accessibility Friendly** – Semantic HTML, ARIA live regions, and clear labels.
-- 🧠 **SEO Optimized** – Proper meta tags and structured page content.
-- 💅 **Modern UI/UX** – Clean, minimal design using CSS variables and transitions.
+- 📝 **Add, Edit, and Delete Tasks**  
+- ✅ **Mark Tasks as Completed**  
+- 💾 **Local Storage Integration** — your data stays even after refreshing  
+- 🎨 **Responsive & Modern UI**  
+- 🌙 **Light/Dark Mode Toggle**  
+- ⚡ **Fast and Optimized for Performance**
 
 ---
 
-## 🖼️ Preview
+## 🧠 Tech Stack
 
-![App Screenshot](assets/screenshot.png) 
-
-
-
---
-
-## 🛠️ Tech Stack
-
-- **HTML5** – Semantic and accessible markup.
-- **CSS3** – Custom variables, dark mode, and flex layout.
-- **JavaScript (ES6)** – Handles dark mode and form submission.
-- **Web3Forms API** – For secure, serverless form processing.
-
----
-
-## ⚙️ Setup Instructions
-
-### 1️⃣ Clone or Download
-```bash
-git clone https://github.com/yourusername/contact-form.git
-cd contact-form
-```
-
-### 2️⃣ Add Your Web3Forms Access Key
-1. Log in to your [Web3Forms Dashboard](https://web3forms.com/).
-2. Copy your **Access Key**.
-3. Paste it in your JavaScript file:
-   ```js
-   formData.append('access_key', 'YOUR_ACCESS_KEY_HERE');
-   ```
-
----
-
-## 📧 Form Configuration (example)
-
-```html
-<form id="contact-form">
-  <input type="text" name="name" placeholder="Your Name" required />
-  <input type="email" name="email" placeholder="Your Email" required />
-  <textarea name="message" placeholder="Your Message" required></textarea>
-  <button type="submit">Send Message</button>
-  <button type="reset" class="clear-btn">Clear Form</button>
-  <p id="form-status" aria-live="polite"></p>
-</form>
-```
-
-**Email Recipient:**  
-All messages will be sent to:  
-📩 **wikigi.git@gmail.com**
-
----
-
-## 🌈 Dark Mode
-
-- Controlled via toggle switch.
-- Saves preference locally.
-- Dark theme uses a rich **deep purple accent** (`#4b0250`) with light text.
+- **Frontend:** React.js + Vite  
+- **Styling:** Tailwind CSS / CSS Modules  
+- **Icons:** Heroicons  
+- **Data Storage:** Local Storage (Browser-based)  
+- **Version Control:** Git & GitHub  
 
 ---
 
 ## 🧩 Folder Structure
 
 ```
-contact-form/
-│
-├── index.html        # Main HTML file
-├── style.css         # Styling (Light/Dark Mode)
-├── app.js            # Handles form submission + theme toggle
-└── assets/
-    └── illustration.svg
+git-it-done/
+├── src/
+│   ├── components/
+│   ├── assets/
+│   ├── App.jsx
+│   └── main.jsx
+├── public/
+├── package.json
+├── vite.config.js
+└── README.md
 ```
 
 ---
 
-## 🧪 Accessibility Checklist
+## ⚙️ Installation & Setup
 
-- [x] Semantic HTML elements (`<form>`, `<label>`, `<button>`)
-- [x] ARIA live regions for form status
-- [x] Keyboard accessible
-- [x] Color contrast compliant for dark/light modes
-
----
-
-## 🪄 Deployment
-
-You can host it easily on:
-- **GitHub Pages**
-- **Vercel**
-- **Netlify**
-- **Any static hosting service**
-
----
-
-## 🧠 Credits
-
-- Developed by **Mwihaki Githii**  
-- Email delivery powered by [Web3Forms](https://web3forms.com)
-
----
-
-## 📸 Preview
-
-> Responsive and elegant contact form with light/dark themes and email functionality.
+1. Clone the repository  
+   ```bash
+   git clone https://github.com/<your-username>/git-it-done.git
+   ```
+2. Navigate to the project folder  
+   ```bash
+   cd git-it-done
+   ```
+3. Install dependencies  
+   ```bash
+   npm install
+   ```
+4. Run the development server  
+   ```bash
+   npm run dev
+   ```
+5. Open in your browser  
+   ```
+   http://localhost:5173
+   ```
 
 ---
 
-### 📬 Contact
+## 🌐 Deployment
 
-If you’d like to collaborate, feel free to reach out through the form — or directly at:  
-**📧 wikigi.git@gmail.com**
+Deploy easily on **GitHub Pages**, **Netlify**, or **Vercel**.
 
+Example (GitHub Pages):
+```bash
+npm run build
+npm run deploy
+```
+
+---
+
+## 🧑‍💻 Author
+
+**Mwihaki Githii**  
+📧 [wikigi.git@gmail.com](mailto:wikigi.git@gmail.com)  
+🌍 [Portfolio Website](https://github.com/kikinjeri)
+
+---
+
+## 📸 Screenshot Placeholder
+
+Add your project screenshot to `/assets/screenshot-placeholder.png` and replace the image link above.
+
+---
+
+## 🪪 License
+
+This project is licensed under the **MIT License** — free to use, modify, and distribute.
+
+---
+
+> Made with ❤️ by Mwihaki Githii — turning ideas into clean, functional web apps.
