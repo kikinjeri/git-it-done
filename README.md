@@ -18,9 +18,9 @@ Git it Done! is a responsive web app that allows you to search for GitHub reposi
 
 ## 🖼️ Preview
 
+![App Screenshot](assets/screenshot.png) 
 
 
-[Contact Form Preview](assets/screenshot.png)
 
 --
 
