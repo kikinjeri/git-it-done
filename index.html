@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Git it Done</title>
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-uM6N+5q8Lk1qX1gK9dXUhfJ0j0Kz8pXh6y8N99S+6cmnICxkBrV8f7vXKZ0E7tBvG7MThU8l6aSV7v6m0Vtq6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body class="flex-column min-100-vh">
 
-  <header class="hero flex-column">
+<body class="flex-column min-100-vh">
+  <header class="hero">
     <h1 class="app-title"><i class="fab fa-github"></i> Git it Done!</h1>
-    <p>Search for a GitHub user or click on a language to see repositories and their open issues.</p>
+    <p>Search for a GitHub user or click a language to see repositories and open issues.</p>
   </header>
 
-  <main class="flex-row">
+  <main class="flex-row justify-space-between">
     <div class="col-12 col-md-4 flex-column">
       <div class="card">
         <h3 class="card-header">Search by User</h3>
         <form id="user-form" class="card-body">
-          <label for="username" class="form-label">Username</label>
-          <input type="text" id="username" name="username" class="form-input" aria-required="true" autofocus>
+          <label class="form-label" for="username">Username</label>
+          <input name="username" id="username" type="text" autofocus class="form-input">
           <button type="submit" class="btn">Get User</button>
         </form>
       </div>
 
       <div class="card">
         <h3 class="card-header">Search by Language</h3>
-        <div id="language-buttons" class="card-body">
-          <button class="btn" data-language="javascript" aria-label="Search JavaScript repos">JavaScript</button>
-          <button class="btn" data-language="html" aria-label="Search HTML repos">HTML</button>
-          <button class="btn" data-language="css" aria-label="Search CSS repos">CSS</button>
+        <div id="language-buttons" class="card-body flex-column">
+          <button class="btn" data-language="javascript"><i class="fab fa-js-square"></i> JavaScript</button>
+          <button class="btn" data-language="html"><i class="fab fa-html5"></i> HTML</button>
+          <button class="btn" data-language="css"><i class="fab fa-css3-alt"></i> CSS</button>
         </div>
       </div>
     </div>
 
     <div class="col-12 col-md-8 flex-column">
-      <h2>Showing Repositories for: <span id="repo-search-term">None</span></h2>
+      <h2>Showing Repositories for: <span id="repo-search-term"></span></h2>
       <div id="repos-container" class="list-group">
-        <p>Enter a username or select a language to see repositories...</p>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
       </div>
     </div>
   </main>

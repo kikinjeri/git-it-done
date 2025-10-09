@@ -21,9 +21,9 @@ Git-It-Done combines simplicity with power — allowing you to create, track, an
 
 ## 🧠 Tech Stack
 
-- **Frontend:** React.js + Vite  
-- **Styling:** Tailwind CSS / CSS Modules  
-- **Icons:** Heroicons  
+- **Frontend:** HTML, CSS, JS  
+
+ 
 - **Data Storage:** Local Storage (Browser-based)  
 - **Version Control:** Git & GitHub  
 

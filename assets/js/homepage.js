@@ -6,9 +6,14 @@ const repoSearchTerm = document.querySelector("#repo-search-term");
 
 async function fetchFromGitHub(url) {
   try {
+    const cached = sessionStorage.getItem(url);
+    if (cached) return JSON.parse(cached);
+
     const res = await fetch(url);
     if (!res.ok) throw new Error(res.statusText);
-    return res.json();
+    const data = await res.json();
+    sessionStorage.setItem(url, JSON.stringify(data));
+    return data;
   } catch (err) {
     alert("Error: " + err.message);
     return [];
@@ -16,42 +21,42 @@ async function fetchFromGitHub(url) {
 }
 
 async function getUserRepos(user) {
-  repoContainerEl.innerHTML = "<p>Loading repositories...</p>";
-  const data = await fetchFromGitHub(`https://api.github.com/users/${user}/repos`);
-  displayRepos(data, user);
+  repoContainerEl.innerHTML = `<p>Loading repos...</p>`;
+  const url = `https://api.github.com/users/${user}/repos`;
+  const repos = await fetchFromGitHub(url);
+  displayRepos(repos, user);
 }
 
 async function getFeaturedRepos(language) {
-  repoContainerEl.innerHTML = "<p>Loading repositories...</p>";
-  const data = await fetchFromGitHub(`https://api.github.com/search/repositories?q=${language}+is:featured&sort=help-wanted-issues`);
+  repoContainerEl.innerHTML = `<p>Loading featured repos...</p>`;
+  const url = `https://api.github.com/search/repositories?q=${language}+is:featured&sort=help-wanted-issues`;
+  const data = await fetchFromGitHub(url);
   displayRepos(data.items, language);
 }
 
 function displayRepos(repos, searchTerm) {
-  repoSearchTerm.textContent = searchTerm;
   repoContainerEl.innerHTML = "";
-
-  if (!repos || repos.length === 0) {
-    repoContainerEl.innerHTML = "<p>No repositories found.</p>";
+  if (!repos.length) {
+    repoContainerEl.innerHTML = `<p>No repositories found.</p>`;
     return;
   }
 
+  repoSearchTerm.textContent = searchTerm;
+
   repos.forEach(repo => {
+    const repoName = `${repo.owner.login}/${repo.name}`;
     const repoEl = document.createElement("a");
     repoEl.className = "list-item";
-    repoEl.href = `./single-repo.html?repo=${repo.owner.login}/${repo.name}`;
+    repoEl.href = `./single-repo.html?repo=${repoName}`;
 
     const titleEl = document.createElement("span");
-    titleEl.textContent = `${repo.owner.login}/${repo.name}`;
+    titleEl.textContent = repoName;
     repoEl.appendChild(titleEl);
 
     const statusEl = document.createElement("span");
     statusEl.className = "status-icon";
-    if (repo.open_issues_count > 0) {
-      statusEl.innerHTML = `<i class="fas fa-times icon-danger"></i>${repo.open_issues_count} issue(s)`;
-    } else {
-      statusEl.innerHTML = `<i class="fas fa-check-square icon-success"></i>`;
-    }
+    statusEl.textContent = repo.open_issues_count > 0 ? `${repo.open_issues_count} issues` : "No issues";
+    statusEl.classList.add(repo.open_issues_count > 0 ? "icon-danger" : "icon-success");
     repoEl.appendChild(statusEl);
 
     repoContainerEl.appendChild(repoEl);
@@ -62,10 +67,11 @@ userFormEl.addEventListener("submit", e => {
   e.preventDefault();
   const username = nameInputEl.value.trim();
   if (username) getUserRepos(username);
+  nameInputEl.value = "";
 });
 
 languageButtonsEl.addEventListener("click", e => {
-  const language = e.target.getAttribute("data-language");
-  if (language) getFeaturedRepos(language);
+  const lang = e.target.dataset.language;
+  if (lang) getFeaturedRepos(lang);
 });
 

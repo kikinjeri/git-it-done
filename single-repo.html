@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Git it Done</title>
+  <title>Git it Done - Repo Issues</title>
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-uM6N+5q8Lk1qX1gK9dXUhfJ0j0Kz8pXh6y8N99S+6cmnICxkBrV8f7vXKZ0E7tBvG7MThU8l6aSV7v6m0Vtq6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body class="flex-column min-100-vh">
 
+<body class="flex-column min-100-vh">
   <header class="hero flex-column">
     <h1 class="app-title">Showing Issues for: <span id="repo-name">Loading...</span></h1>
-    <a href="./index.html" class="btn-back btn">Go Back</a>
+    <a href="./index.html" class="btn btn-back"><i class="fas fa-arrow-left"></i> Go Back</a>
   </header>
 
   <main class="flex-column">
     <div id="issues-container" class="list-group">
-      <p>Loading issues...</p>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
     </div>
+
     <div id="limit-warning" role="alert"></div>
   </main>
 

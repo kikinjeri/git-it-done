@@ -2,61 +2,48 @@ const repoNameEl = document.querySelector("#repo-name");
 const issueContainerEl = document.querySelector("#issues-container");
 const limitWarningEl = document.querySelector("#limit-warning");
 
-// Fetch JSON helper with error handling
 async function fetchFromGitHub(url) {
   try {
+    const cached = sessionStorage.getItem(url);
+    if (cached) return JSON.parse(cached);
+
     const res = await fetch(url);
     if (!res.ok) throw new Error(res.statusText);
-    return res.json();
+    const data = await res.json();
+    sessionStorage.setItem(url, JSON.stringify(data));
+    return data;
   } catch (err) {
-    alert("Unable to connect to GitHub: " + err.message);
+    issueContainerEl.innerHTML = `<p>Error loading issues: ${err.message}</p>`;
     return [];
   }
 }
 
-// Get repo name from query string
 function getRepoName() {
-  const queryString = document.location.search;
-  const repo = queryString.split("=")[1];
-
-  if (!repo) {
-    document.location.replace("./index.html");
-    return;
-  }
-
-  repoNameEl.textContent = repo;
-  document.title = `Git it Done - ${repo}`;
-
-  getRepoIssues(repo);
+  const query = document.location.search.split("=")[1];
+  if (!query) return document.location.replace("./index.html");
+  repoNameEl.textContent = query;
+  getRepoIssues(query);
 }
 
-// Fetch issues from GitHub
 async function getRepoIssues(repo) {
-  issueContainerEl.innerHTML = "<p>Loading issues...</p>";
-  const apiUrl = `https://api.github.com/repos/${repo}/issues?direction=asc`;
-  const issues = await fetchFromGitHub(apiUrl);
-
+  issueContainerEl.innerHTML = `<div class="skeleton"></div><div class="skeleton"></div>`;
+  const issues = await fetchFromGitHub(`https://api.github.com/repos/${repo}/issues?direction=asc`);
   displayIssues(issues);
 
-  // Check if paginated (more than 30 issues)
-  const res = await fetch(apiUrl, { method: "HEAD" });
-  if (res.headers.get("Link")) {
-    displayWarning(repo);
-  }
+  const res = await fetch(`https://api.github.com/repos/${repo}/issues?direction=asc`, { method: "HEAD" });
+  if (res.headers.get("Link")) displayWarning(repo);
 }
 
-// Display issues in the DOM
 function displayIssues(issues) {
   issueContainerEl.innerHTML = "";
-
-  if (!issues || issues.length === 0) {
-    issueContainerEl.innerHTML = "<p>This repo has no open issues!</p>";
+  if (!issues.length) {
+    issueContainerEl.innerHTML = "<p>No open issues!</p>";
     return;
   }
 
   issues.forEach(issue => {
     const issueEl = document.createElement("a");
-    issueEl.className = "list-item flex-row justify-space-between align-center";
+    issueEl.className = "list-item";
     issueEl.href = issue.html_url;
     issueEl.target = "_blank";
 
@@ -72,15 +59,9 @@ function displayIssues(issues) {
   });
 }
 
-// Display warning for paginated issues
 function displayWarning(repo) {
-  limitWarningEl.innerHTML = `To see more than 30 issues, visit `;
-  const linkEl = document.createElement("a");
-  linkEl.href = `https://github.com/${repo}/issues`;
-  linkEl.target = "_blank";
-  linkEl.textContent = "GitHub.com";
-  limitWarningEl.appendChild(linkEl);
+  limitWarningEl.innerHTML = `More than 30 issues. See all on <a href="https://github.com/${repo}/issues" target="_blank">GitHub.com</a>`;
 }
 
-// Initialize page
 getRepoName();
+
